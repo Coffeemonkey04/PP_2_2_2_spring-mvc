@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Машинки</title>
+</head>
+<body>
+
+<form method="get">
+    <label for="countInput">Показать машин:</label>
+    <input type="number"
+           id="countInput"
+           name="count"
+           th:value="${param.count}">
+    <button type="submit">Показать</button>
+
+    <a href="/hello/cars">Показать все</a>
+</form>
+
+<div>
+    <table th:border="1">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Series</th>
+        </tr>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.getId()}"></td>
+            <td th:text="${car.getName()}"></td>
+            <td th:text="${car.getSeries()}"></td>
+        </tr>
+    </table>
+</div>
+<p th:if="${cars.isEmpty()}">Машин не найдено</p>
+<br><br>
+    <a href="/hello">Переход на стартовую страничку</a>
+
+</body>
+</html>
