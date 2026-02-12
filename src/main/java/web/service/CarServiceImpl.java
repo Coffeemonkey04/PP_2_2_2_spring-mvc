@@ -24,11 +24,12 @@ public class CarServiceImpl implements CarService{
 
     @Override
     public List<Car> getCars(Integer count) {
-        long limit = count == null || count < 0 ? 0 :
-                Math.min(count, cars.size());
-
-        return cars.stream()
-                .limit(limit)
-                .collect(Collectors.toList());
+        if(count == null || count >= cars.size()) {
+            return new ArrayList<>(cars);
+        } else if (count <= 0) {
+            return Collections.emptyList();
+        } else {
+            return new ArrayList<>(cars.subList(0, count));
+        }
     }
 }
