@@ -10,14 +10,14 @@ import web.service.CarService;
 public class CarController {
 
     private final CarService carService;
+
     public CarController(CarService carService) {
         this.carService = carService;
     }
 
     @GetMapping(value = "/cars")
     public String printAmountOfCars(
-            @RequestParam(value = "count", required = false) Integer count,
-            ModelMap model) {
+            @RequestParam(value = "count", required = false) Integer count, ModelMap model) {
         model.addAttribute("cars", carService.getCars(count));
         return "cars";
     }
